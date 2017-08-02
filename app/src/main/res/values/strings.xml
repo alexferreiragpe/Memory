@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Memory</string>
+    <string name="BtnReiniciar">Reiniciar Jogo</string>
+</resources>
