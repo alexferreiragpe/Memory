@@ -1,7 +1,7 @@
 package memory.alex.com.memory;
 
 import android.content.DialogInterface;
-import android.graphics.Color;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -9,14 +9,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-
-import static java.util.Arrays.asList;
 
 public class Home extends AppCompatActivity {
 
@@ -88,7 +85,7 @@ public class Home extends AppCompatActivity {
 
             imgBotoes[i].postDelayed(new Runnable() {
                 public void run() {
-                    imgBotoes[finalI].setImageResource(Integer.parseInt(iconeescondeimagem));
+                    imgBotoes[finalI].setBackgroundResource(Integer.parseInt(iconeescondeimagem));
                 }
             }, 5000);
         }
@@ -98,66 +95,67 @@ public class Home extends AppCompatActivity {
         for (int j = 0; j < imgBotoes.length; j++) {
             final int finalJ = j;
             imgBotoes[j].setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        ListaValoresBotaoClicado.add(imgBotoes[finalJ].getTag().toString());
-                        for (int k = 0; k < imgBotoes.length; k++) {
-                            if (imgBotoes[finalJ].getTag().equals(ListaValoresBotaoClicado.get(0))||imgBotoes[finalJ].getTag().equals(ListaValoresBotaoClicado.get(1))) {
-                                imgBotoes[finalJ].setImageResource(Integer.parseInt(ArrayImagens[finalJ]));
-                            }
-                        }
-                        if (ListaValoresBotaoClicado.size() == 2) {
-                            for (int i=0;i<imgBotoes.length;i++){
-                                if (ListaValoresBotaoClicado.get(0).equals(ListaValoresBotaoClicado.get(1))) {
-                                    for (i = 0; i < imgBotoes.length; i++) {
-                                        if (imgBotoes[i].getTag().equals(ListaValoresBotaoClicado.get(0)) && imgBotoes[i].getTag().equals(ListaValoresBotaoClicado.get(1))) {
-                                            final int finalI = i;
-                                            imgBotoes[i].postDelayed(new Runnable() {
-                                                public void run() {
-                                                    imgBotoes[finalI].setImageResource(Integer.parseInt(ArrayImagens[finalJ]));
-                                                    imgBotoes[finalI].setClickable(false);
-                                                    imgBotoes[finalI].setTag("ok");
-                                                }
-                                            }, 1000);
-                                        }
-                                    }
-                                    Acerto = Acerto + 1;
-                                } else {
-                                    for (i = 0; i < imgBotoes.length; i++) {
-                                        if (imgBotoes[i].getTag()!="ok") {
-                                            final int finalI = i;
-                                            imgBotoes[i].postDelayed(new Runnable() {
-                                                public void run() {
-                                                    imgBotoes[finalI].setImageResource(Integer.parseInt(iconeescondeimagem));
-                                                    imgBotoes[finalI].setClickable(true);
-                                                }
-                                            }, 1000);
-                                        }
-                                    }
-                                    Erro = Erro + 1;
-                                }
-                            }
-                            ListaValoresBotaoClicado.clear();
-                        }
-
-                        if (Acerto == 15) {
-                            AlertDialog.Builder alertDialog = new AlertDialog.Builder(Home.this);
-                            alertDialog.setTitle("Memory...");
-                            alertDialog.setMessage("Parabéns! Você Terminou."+"\nAcertos: "+Acerto+"\nErros: "+Erro);
-                            alertDialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
-                                }
-                            });
-                            alertDialog.setIcon(R.drawable.icone);
-                            alertDialog.show();
-                            btReiniciar.setVisibility(View.VISIBLE);
+                @Override
+                public void onClick(View view) {
+                    ListaValoresBotaoClicado.add(imgBotoes[finalJ].getTag().toString());
+                    imgBotoes[finalJ].setClickable(false);
+                    for (int k = 0; k < imgBotoes.length; k++) {
+                        if (imgBotoes[finalJ].getTag().equals(ListaValoresBotaoClicado.get(0)) || imgBotoes[finalJ].getTag().equals(ListaValoresBotaoClicado.get(1))) {
+                            imgBotoes[finalJ].setBackgroundResource(Integer.parseInt(ArrayImagens[finalJ]));
                         }
                     }
-                });
-            }
+                    if (ListaValoresBotaoClicado.size() == 2) {
+                        for (int i = 0; i < imgBotoes.length; i++) {
+                            if (ListaValoresBotaoClicado.get(0).equals(ListaValoresBotaoClicado.get(1))) {
+                                for (i = 0; i < imgBotoes.length; i++) {
+                                    if (imgBotoes[i].getTag().equals(ListaValoresBotaoClicado.get(0)) && imgBotoes[i].getTag().equals(ListaValoresBotaoClicado.get(1))) {
+                                        final int finalI = i;
+                                        imgBotoes[i].postDelayed(new Runnable() {
+                                            public void run() {
+                                                imgBotoes[finalI].setBackgroundResource(Integer.parseInt(ArrayImagens[finalJ]));
+                                                imgBotoes[finalI].setClickable(false);
+                                                imgBotoes[finalI].setTag("ok");
+                                            }
+                                        }, 1000);
+                                    }
+                                }
+                                Acerto = Acerto + 1;
+                            } else {
+                                for (i = 0; i < imgBotoes.length; i++) {
+                                    if (imgBotoes[i].getTag() != "ok") {
+                                        final int finalI = i;
+                                        imgBotoes[i].postDelayed(new Runnable() {
+                                            public void run() {
+                                                imgBotoes[finalI].setBackgroundResource(Integer.parseInt(iconeescondeimagem));
+                                                imgBotoes[finalI].setClickable(true);
+                                            }
+                                        }, 1000);
+                                    }
+                                }
+                                Erro = Erro + 1;
+                            }
+                        }
+                        ListaValoresBotaoClicado.clear();
+                    }
+
+                    if (Acerto == 15) {
+                        AlertDialog.Builder alertDialog = new AlertDialog.Builder(Home.this);
+                        alertDialog.setTitle("Memory...");
+                        alertDialog.setMessage("Parabéns! Você Terminou." + "\nAcertos: " + Acerto + "\nErros: " + Erro);
+                        alertDialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                        alertDialog.setIcon(R.drawable.icone);
+                        alertDialog.show();
+                        btReiniciar.setVisibility(View.VISIBLE);
+                    }
+                }
+            });
+        }
         btReiniciar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -177,23 +175,25 @@ public class Home extends AppCompatActivity {
 
                 Collections.shuffle(Arrays.asList(ArrayImagens));
 
-                for (int i=0;i<imgBotoes.length;i++){
-                    imgBotoes[i].setBackground(null);
-                    imgBotoes[i].setClickable(true);
-                }
-
                 for (int i = 0; i < ArrayImagens.length; i++) {
+                    imgBotoes[i].setClickable(true);
                     final int finalI = i;
-                    imgBotoes[i].setBackgroundResource(Integer.parseInt(ArrayImagens[i]));
+                    imgBotoes[finalI].setBackgroundResource(Integer.parseInt(ArrayImagens[finalI]));
                     imgBotoes[i].setTag(ArrayImagens[i]);
 
                     imgBotoes[i].postDelayed(new Runnable() {
                         public void run() {
-                            imgBotoes[finalI].setImageResource(Integer.parseInt(iconeescondeimagem));
+                            imgBotoes[finalI].setBackgroundResource(Integer.parseInt(iconeescondeimagem));
                         }
                     }, 5000);
                 }
+            }
+        });
 
+        btnSobre.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Home.this, Sobre.class));
 
             }
         });
