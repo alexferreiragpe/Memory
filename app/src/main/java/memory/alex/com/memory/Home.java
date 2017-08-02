@@ -178,14 +178,15 @@ public class Home extends AppCompatActivity {
                 for (int i = 0; i < ArrayImagens.length; i++) {
                     imgBotoes[i].setClickable(true);
                     final int finalI = i;
+                    imgBotoes[finalI].setBackgroundResource(android.R.drawable.btn_default);
                     imgBotoes[finalI].setBackgroundResource(Integer.parseInt(ArrayImagens[finalI]));
-                    imgBotoes[i].setTag(ArrayImagens[i]);
+                    imgBotoes[finalI].setTag(ArrayImagens[i]);
 
-                    imgBotoes[i].postDelayed(new Runnable() {
+                    imgBotoes[finalI].postDelayed(new Runnable() {
                         public void run() {
                             imgBotoes[finalI].setBackgroundResource(Integer.parseInt(iconeescondeimagem));
                         }
-                    }, 5000);
+                    }, 3000);
                 }
             }
         });
