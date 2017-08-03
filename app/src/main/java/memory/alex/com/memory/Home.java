@@ -9,15 +9,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.Locale;
-
-import static android.R.attr.format;
 
 public class Home extends AppCompatActivity {
 
@@ -27,7 +23,7 @@ public class Home extends AppCompatActivity {
             bt21, bt22, bt23, bt24, bt25, bt26, bt27, bt28, bt29, bt30;
     Button btReiniciar;
     ImageButton btnSobre;
-    int Acerto = 0, Erro = 0,total=0;
+    int Acerto = 0, Erro = 0, total = 0;
 
 
     @Override
@@ -145,11 +141,11 @@ public class Home extends AppCompatActivity {
 
                     }
 
-                    if (Acerto==15) {
-                        total=((Erro*100)/(Acerto+Erro));
+                    if (Acerto == 15) {
+                        total = ((Acerto * 100) / (Acerto + Erro));
                         AlertDialog.Builder alertDialog = new AlertDialog.Builder(Home.this);
                         alertDialog.setTitle("Memory...");
-                        alertDialog.setMessage("Parabéns! \n\nVocê Conseguiu" + "\n\nAcertos: " + Acerto + "\nErros:   " + Erro+"\n\nAproveitamento: "+total+"%");
+                        alertDialog.setMessage("Parabéns! \n\nVocê Conseguiu" + "\n\nAcertos: " + Acerto + "\nErros:   " + Erro + "\n\nAproveitamento: " + total + "%");
                         alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 
                             @Override
@@ -160,12 +156,7 @@ public class Home extends AppCompatActivity {
                         alertDialog.setIcon(R.drawable.icone);
                         alertDialog.show();
                         btReiniciar.setVisibility(View.VISIBLE);
-                     /*   for (int i=0;i<imgBotoes.length;i++){
-                            if (imgBotoes[i].getTag().equals("ok")){
-                                imgBotoes[i].setTag("");
-                            }
 
-                        }*/
                     }
                 }
             });
@@ -176,24 +167,20 @@ public class Home extends AppCompatActivity {
                 btReiniciar.setVisibility(View.INVISIBLE);
                 Acerto = 0;
                 Erro = 0;
-                total=0;
+                total = 0;
                 ListaValoresBotaoClicado.clear();
 
-                final String[] ArrayImagens = new String[]{String.valueOf(R.drawable.elefante), String.valueOf(R.drawable.elefante), String.valueOf(R.drawable.cao), String.valueOf(R.drawable.cao),
-                        String.valueOf(R.drawable.coelho), String.valueOf(R.drawable.coelho), String.valueOf(R.drawable.passaro), String.valueOf(R.drawable.passaro),
-                        String.valueOf(R.drawable.cavalo), String.valueOf(R.drawable.cavalo), String.valueOf(R.drawable.tartaruga), String.valueOf(R.drawable.tartaruga),
-                        String.valueOf(R.drawable.lagosta), String.valueOf(R.drawable.lagosta), String.valueOf(R.drawable.pinguim), String.valueOf(R.drawable.pinguim),
-                        String.valueOf(R.drawable.macaco), String.valueOf(R.drawable.macaco), String.valueOf(R.drawable.cavalomarinho), String.valueOf(R.drawable.cavalomarinho),
-                        String.valueOf(R.drawable.porco), String.valueOf(R.drawable.porco), String.valueOf(R.drawable.sapo), String.valueOf(R.drawable.sapo),
-                        String.valueOf(R.drawable.urso), String.valueOf(R.drawable.urso), String.valueOf(R.drawable.vaca), String.valueOf(R.drawable.vaca),
-                        String.valueOf(R.drawable.caramujo), String.valueOf(R.drawable.caramujo)};
-
                 Collections.shuffle(Arrays.asList(ArrayImagens));
+
+                for (int i = 0; i < imgBotoes.length; i++) {
+                    imgBotoes[i].setTag("");
+                }
 
                 for (int i = 0; i < ArrayImagens.length; i++) {
 
                     imgBotoes[i].setBackgroundResource(Integer.parseInt(ArrayImagens[i]));
                     imgBotoes[i].setTag(ArrayImagens[i]);
+                    imgBotoes[i].setClickable(true);
 
                     final int finalI = i;
                     imgBotoes[i].postDelayed(new Runnable() {
