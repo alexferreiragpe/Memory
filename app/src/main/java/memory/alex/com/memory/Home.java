@@ -14,6 +14,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
+
+import static android.R.attr.format;
 
 public class Home extends AppCompatActivity {
 
@@ -94,7 +97,7 @@ public class Home extends AppCompatActivity {
 
         for (int j = 0; j < imgBotoes.length; j++) {
             final int finalJ = j;
-            imgBotoes[j].setOnClickListener(new View.OnClickListener() {
+            imgBotoes[finalJ].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     ListaValoresBotaoClicado.add(imgBotoes[finalJ].getTag().toString());
@@ -116,7 +119,7 @@ public class Home extends AppCompatActivity {
                                                 imgBotoes[finalI].setClickable(false);
                                                 imgBotoes[finalI].setTag("ok");
                                             }
-                                        }, 1000);
+                                        }, 100);
                                     }
                                 }
                                 Acerto = Acerto + 1;
@@ -139,9 +142,12 @@ public class Home extends AppCompatActivity {
                     }
 
                     if (Acerto == 15) {
+
+                        double aproveitamento;
+                        aproveitamento=((Acerto/Erro)*100);
                         AlertDialog.Builder alertDialog = new AlertDialog.Builder(Home.this);
                         alertDialog.setTitle("Memory...");
-                        alertDialog.setMessage("Parabéns! Você Terminou." + "\nAcertos: " + Acerto + "\nErros: " + Erro);
+                        alertDialog.setMessage("Parabéns! Você Terminou." + "\nAcertos: " + Acerto + "\nErros: " + Erro+ "\nAproveitamento: "+Double.valueOf(String.format(Locale.US, "%.2f", aproveitamento)));
                         alertDialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 
                             @Override
@@ -152,6 +158,12 @@ public class Home extends AppCompatActivity {
                         alertDialog.setIcon(R.drawable.icone);
                         alertDialog.show();
                         btReiniciar.setVisibility(View.VISIBLE);
+                     /*   for (int i=0;i<imgBotoes.length;i++){
+                            if (imgBotoes[i].getTag().equals("ok")){
+                                imgBotoes[i].setTag("");
+                            }
+
+                        }*/
                     }
                 }
             });
