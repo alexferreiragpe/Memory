@@ -15,14 +15,11 @@
         android:id="@+id/btSobre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="15dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="13dp"
-        android:layout_toEndOf="@+id/btnReiniciar"
-        android:layout_toRightOf="@+id/btnReiniciar"
+        android:layout_marginTop="25dp"
         android:background="@drawable/botao_redondo_sobre"
-        app:srcCompat="@android:drawable/ic_menu_info_details" />
+        app:srcCompat="@android:drawable/ic_menu_info_details"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
     <TableLayout
         android:id="@+id/tableLayout2"
