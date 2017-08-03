@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,7 +27,8 @@ public class Home extends AppCompatActivity {
             bt21, bt22, bt23, bt24, bt25, bt26, bt27, bt28, bt29, bt30;
     Button btReiniciar;
     ImageButton btnSobre;
-    int Acerto = 0, Erro = 0;
+    int Acerto = 0, Erro = 0,total=0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,18 +139,18 @@ public class Home extends AppCompatActivity {
                                 }
                                 Erro = Erro + 1;
                             }
+
                         }
                         ListaValoresBotaoClicado.clear();
+
                     }
 
-                    if (Acerto == 15) {
-
-                        double aproveitamento;
-                        aproveitamento=((Acerto/Erro)*100);
+                    if (Acerto==15) {
+                        total=((Erro*100)/(Acerto+Erro));
                         AlertDialog.Builder alertDialog = new AlertDialog.Builder(Home.this);
                         alertDialog.setTitle("Memory...");
-                        alertDialog.setMessage("Parabéns! Você Terminou." + "\nAcertos: " + Acerto + "\nErros: " + Erro+ "\nAproveitamento: "+Double.valueOf(String.format(Locale.US, "%.2f", aproveitamento)));
-                        alertDialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        alertDialog.setMessage("Parabéns! \n\nVocê Conseguiu" + "\n\nAcertos: " + Acerto + "\nErros:   " + Erro+"\n\nAproveitamento: "+total+"%");
+                        alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -174,6 +176,7 @@ public class Home extends AppCompatActivity {
                 btReiniciar.setVisibility(View.INVISIBLE);
                 Acerto = 0;
                 Erro = 0;
+                total=0;
                 ListaValoresBotaoClicado.clear();
 
                 final String[] ArrayImagens = new String[]{String.valueOf(R.drawable.elefante), String.valueOf(R.drawable.elefante), String.valueOf(R.drawable.cao), String.valueOf(R.drawable.cao),
@@ -188,17 +191,17 @@ public class Home extends AppCompatActivity {
                 Collections.shuffle(Arrays.asList(ArrayImagens));
 
                 for (int i = 0; i < ArrayImagens.length; i++) {
-                    imgBotoes[i].setClickable(true);
-                    final int finalI = i;
-                    imgBotoes[finalI].setBackgroundResource(android.R.drawable.btn_default);
-                    imgBotoes[finalI].setBackgroundResource(Integer.parseInt(ArrayImagens[finalI]));
-                    imgBotoes[finalI].setTag(ArrayImagens[i]);
 
-                    imgBotoes[finalI].postDelayed(new Runnable() {
+                    imgBotoes[i].setBackgroundResource(Integer.parseInt(ArrayImagens[i]));
+                    imgBotoes[i].setTag(ArrayImagens[i]);
+
+                    final int finalI = i;
+                    imgBotoes[i].postDelayed(new Runnable() {
                         public void run() {
                             imgBotoes[finalI].setBackgroundResource(Integer.parseInt(iconeescondeimagem));
                         }
-                    }, 3000);
+                    }, 5000);
+
                 }
             }
         });
