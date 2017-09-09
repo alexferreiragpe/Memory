@@ -82,7 +82,7 @@ public class Home extends AppCompatActivity {
         for (int i = 0; i < ArrayImagens.length; i++) {
             final int finalI = i;
             imgBotoes[finalI].setBackgroundResource(Integer.parseInt(ArrayImagens[finalI]));
-            imgBotoes[finalI].setTag(ArrayImagens[finalI]);
+        imgBotoes[finalI].setTag(ArrayImagens[finalI]);
 
             imgBotoes[i].postDelayed(new Runnable() {
                 public void run() {
@@ -91,21 +91,24 @@ public class Home extends AppCompatActivity {
             }, 5000);
         }
 
-        final List ListaValoresBotaoClicado = new ArrayList();
+        final List ListaValoresBotaoClicado = new ArrayList(2);
 
         for (int j = 0; j < imgBotoes.length; j++) {
             final int finalJ = j;
             imgBotoes[finalJ].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    ListaValoresBotaoClicado.add(imgBotoes[finalJ].getTag().toString());
                     imgBotoes[finalJ].setClickable(false);
+                    ListaValoresBotaoClicado.add(imgBotoes[finalJ].getTag().toString());
                     for (int k = 0; k < imgBotoes.length; k++) {
                         if (imgBotoes[finalJ].getTag().equals(ListaValoresBotaoClicado.get(0)) || imgBotoes[finalJ].getTag().equals(ListaValoresBotaoClicado.get(1))) {
                             imgBotoes[finalJ].setBackgroundResource(Integer.parseInt(ArrayImagens[finalJ]));
                         }
                     }
-                    if (ListaValoresBotaoClicado.size() == 2) {
+
+                    if(ListaValoresBotaoClicado.size()>2){
+                        ListaValoresBotaoClicado.clear();
+                    }else if (ListaValoresBotaoClicado.size() == 2) {
                         for (int i = 0; i < imgBotoes.length; i++) {
                             if (ListaValoresBotaoClicado.get(0).equals(ListaValoresBotaoClicado.get(1))) {
                                 for (i = 0; i < imgBotoes.length; i++) {
@@ -130,7 +133,7 @@ public class Home extends AppCompatActivity {
                                                 imgBotoes[finalI].setBackgroundResource(Integer.parseInt(iconeescondeimagem));
                                                 imgBotoes[finalI].setClickable(true);
                                             }
-                                        }, 1000);
+                                        }, 150);
                                     }
                                 }
                                 Erro = Erro + 1;
