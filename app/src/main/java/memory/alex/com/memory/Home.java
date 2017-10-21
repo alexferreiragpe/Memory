@@ -148,7 +148,7 @@ public class Home extends AppCompatActivity {
                         total = ((Acerto * 100) / (Acerto + Erro));
                         AlertDialog.Builder alertDialog = new AlertDialog.Builder(Home.this);
                         alertDialog.setTitle("Memory...");
-                        alertDialog.setMessage("Parabéns! \n\nVocê Conseguiu" + "\n\nAcertos: " + Acerto + "\nErros:   " + Erro + "\n\nAproveitamento: " + total + "%");
+                        alertDialog.setMessage("Parabéns! \n\nVocê Conseguiu" + "\n\nSeu Aproveitamento foi de " + total + "%");
                         alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 
                             @Override
